@@ -1,7 +1,7 @@
-Notes
-Notebooks
-Search
-Bonus: Tags
-Bonus: Rich-text editing
-Bonus: Reminders
-Bonus: Auto save
+* Notes
+* Notebooks
+* Search
+* Bonus: Tags
+* Bonus: Rich-text editing
+* Bonus: Reminders
+* Bonus: Auto save
