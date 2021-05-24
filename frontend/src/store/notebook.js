@@ -2,11 +2,18 @@ import { csrfFetch } from "./csrf";
 
 const CREATE_NOTEBOOK = "notebook/new";
 const DELETE_NOTEBOOK = "notebook/delete";
+const READ_NOTEBOOK = "notebook/";
 
-const setNotebook = (notebook) => {
+const cNotebook = (notebook) => {
   return {
     type: CREATE_NOTEBOOK,
     payload: notebook,
+  };
+};
+const rNotebook = (notebooks) => {
+  return {
+    type: READ_NOTEBOOK,
+    payload: notebooks,
   };
 };
 
@@ -21,22 +28,33 @@ export const createNotebook = (notebook) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  dispatch(setNotebook(data));
+  dispatch(cNotebook(data));
   return response;
 };
 
-const initialState = { notebook: null };
+export const getAllNotebook = () => async (dispatch) => {
+  const response = await csrfFetch("/api/notebook");
+  const data = await response.json();
+  dispatch(rNotebook(data));
+  return response;
+};
+
+const initialState = { notebooks: null };
 
 const notebookReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case CREATE_NOTEBOOK:
       newState = Object.assign({}, state);
-      newState.user = action.payload;
+      newState.notebooks = action.payload;
       return newState;
     case DELETE_NOTEBOOK:
       newState = Object.assign({}, state);
       newState.notebook = null;
+      return newState;
+    case READ_NOTEBOOK:
+      newState = Object.assign({}, state);
+      newState.notebooks = action.payload;
       return newState;
     default:
       return state;

@@ -11,7 +11,7 @@ const {
 const { Notebook } = require("../../db/models");
 
 const router = express.Router();
-
+//new notebook
 router.post(
   "/new",
   asyncHandler(async (req, res) => {
@@ -21,5 +21,16 @@ router.post(
     return res.json({ notebook });
   })
 );
+//get notebook
+router.get(
+  "/",
+  restoreUser,
+  asyncHandler(async (req, res) => {
+    const { user } = req;
+    console.log("******" + user);
+    const notebooks = await Notebook.findAll({ where: { user_id: user.id } });
 
+    return res.json({ notebooks });
+  })
+);
 module.exports = router;

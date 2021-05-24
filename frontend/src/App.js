@@ -7,6 +7,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import NotebookForm from "./components/NotebookForm";
+import NotebookRender from "./components/NotebookRender";
+import Home from "./components/Home";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +22,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
           <Route path="/login">
             <LoginFormPage />
           </Route>
@@ -29,6 +34,10 @@ function App() {
           <Route path="/notebook/new">
             <NotebookForm />
           </Route>
+          <Route path="/notebook">
+            <NotebookRender />
+          </Route>
+          <Route path="*">The requested url could not be found</Route>
         </Switch>
       )}
     </>
