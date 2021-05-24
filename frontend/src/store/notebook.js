@@ -11,12 +11,12 @@ const setNotebook = (notebook) => {
 };
 
 export const createNotebook = (notebook) => async (dispatch) => {
-  const { user_id, title, color } = notebook;
+  const { user_id, name, color } = notebook;
   const response = await csrfFetch("/api/notebook/new", {
     method: "POST",
     body: JSON.stringify({
       user_id,
-      title,
+      name,
       color,
     }),
   });

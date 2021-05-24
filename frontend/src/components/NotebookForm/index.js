@@ -1,9 +1,9 @@
-// frontend/src/components/LoginFormPage/index.js
+// frontend/src/components/NotebookForm/index
 import React, { useState } from "react";
 import "./NoteForm.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import * as notebookActions from "../../store/notebook";
+import { useHistory } from "react-router-dom";
+import { createNotebook } from "../../store/notebook";
 function NotebookForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -11,27 +11,28 @@ function NotebookForm() {
   const [title, setTitle] = useState("");
   const [color, setColor] = useState(COLORS[0]);
   const [errors, setErrors] = useState([]);
-
+  const history = useHistory();
   if (!sessionUser) {
     window.alert("Please log in first");
-    return <Redirect to="/login" />;
+    history.push("/login");
   }
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title && color) {
       setErrors([]);
-      return dispatch(
-        notebookActions.createNotebook({
-          user_id: sessionUser.id,
-          title,
-          color,
+      const notebook = { user_id: sessionUser.id, name: title, color };
+      return dispatch(createNotebook(notebook))
+        .then(() => {
+          window.alert("Notebook Made");
+          history.push("/");
         })
-      ).catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        });
+    } else {
+      return setErrors(["Please fill in both fields"]);
     }
-    return setErrors(["Please fill in both fields"]);
   };
 
   return (
@@ -43,7 +44,6 @@ function NotebookForm() {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        {sessionUser}
         <label>
           Title
           <input
@@ -61,7 +61,9 @@ function NotebookForm() {
             required
           >
             {COLORS.map((color) => {
-              return <option value={`${color}`}>{`${color}`}</option>;
+              return (
+                <option key={color} value={`${color}`}>{`${color}`}</option>
+              );
             })}
           </select>
         </label>

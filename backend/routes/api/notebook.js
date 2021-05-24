@@ -15,14 +15,10 @@ const router = express.Router();
 router.post(
   "/new",
   asyncHandler(async (req, res) => {
-    const { title, color } = req.body;
-    const { user } = req;
-    console.log(user);
-    const notebook = await Notebook.create({ title });
+    const { user_id, name, color } = req.body;
+    const notebook = await Notebook.create({ user_id, name, color });
 
-    return res.json({
-      user,
-    });
+    return res.json({ notebook });
   })
 );
 
