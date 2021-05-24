@@ -1,3 +1,10 @@
-h1 {
-  color: green;
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 2em;
+  border-bottom: 1px solid #a3b4a2;
+  border-radius: 2px;
+  background-color: #a3b4a2;
+  padding: 1%;
 }

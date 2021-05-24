@@ -1,1 +1,23 @@
 /* TODO Add site wide styles */
+a {
+  border: 1px solid #2589bd;
+  background-color: #2589bd;
+  border-radius: 5px;
+  color: #cdc6ae;
+  padding: 1%;
+  text-decoration: none;
+}
+a:hover {
+  background-color: #187795;
+}
+button {
+  border: 1px solid #2589bd;
+  background-color: #2589bd;
+  border-radius: 5px;
+  color: #cdc6ae;
+  padding: 1%;
+  text-decoration: none;
+}
+button:hover {
+  background-color: #187795;
+}
