@@ -16,7 +16,7 @@ const rNotebook = (notes) => {
   };
 };
 
-export const createNotebook = (notebook) => async (dispatch) => {
+export const createNote = (note) => async (dispatch) => {
   const { user_id, name, color } = notebook;
   const response = await csrfFetch("/api/notebook/new", {
     method: "POST",
