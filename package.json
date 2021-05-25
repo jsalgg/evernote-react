@@ -1,14 +1,24 @@
 {
-    "scripts": {
-        "heroku-postbuild": "npm run build --prefix frontend",
-        "install": "npm --prefix backend install backend && npm --prefix frontend install frontend",
-        "dev:backend": "npm install --prefix backend start",
-        "dev:frontend": "npm install --prefix frontend start",
-        "sequelize": "npm run --prefix backend sequelize",
-        "sequelize-cli": "npm run --prefix backend sequelize-cli",
-        "start": "npm start --prefix backend"
-    },
-    "dependencies": {
-        "pg": "^8.6.0"
-    }
+  "name": "evernote-react",
+  "version": "1.0.0",
+  "description": "A simple Evernote clone focused on decluttering your life and helping you stay on track.",
+  "main": "index.js",
+  "scripts": {
+    "sequelize": "sequelize",
+    "sequelize-cli": "sequelize-cli",
+    "start": "per-env",
+    "start:development": "nodemon -r dotenv/config ./bin/www",
+    "start:production": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsalgg/evernote-react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jsalgg/evernote-react/issues"
+  },
+  "homepage": "https://github.com/jsalgg/evernote-react#readme"
 }
