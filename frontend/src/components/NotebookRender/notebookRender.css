@@ -1,8 +1,25 @@
 .notebook-container {
   border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.notebook-li {
+  text-decoration: none;
+  padding: 2em;
+  border-bottom: 1px solid black;
+  border-radius: 5px;
+  color: white;
+}
+.a-notebook {
+  background-color: white;
+  border: none;
+}
+.a-notebook:hover {
+  background-color: white;
 }

@@ -8,6 +8,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import NotebookForm from "./components/NotebookForm";
 import NotebookRender from "./components/NotebookRender";
+import NotebookHome from "./components/NotebookHome";
 import Home from "./components/Home";
 
 function App() {
@@ -34,9 +35,13 @@ function App() {
           <Route path="/notebook/new">
             <NotebookForm />
           </Route>
+          <Route path="/notebook/:id">
+            <NotebookHome />
+          </Route>
           <Route path="/notebook">
             <NotebookRender />
           </Route>
+
           <Route path="*">The requested url could not be found</Route>
         </Switch>
       )}

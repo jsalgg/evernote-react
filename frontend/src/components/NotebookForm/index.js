@@ -24,7 +24,7 @@ function NotebookForm() {
       return dispatch(createNotebook(notebook))
         .then(() => {
           window.alert("Notebook Made");
-          history.push("/");
+          history.push("/notebook");
         })
         .catch(async (res) => {
           const data = await res.json();

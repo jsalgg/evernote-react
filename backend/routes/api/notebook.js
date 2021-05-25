@@ -27,10 +27,9 @@ router.get(
   restoreUser,
   asyncHandler(async (req, res) => {
     const { user } = req;
-    console.log("******" + user);
     const notebooks = await Notebook.findAll({ where: { user_id: user.id } });
 
-    return res.json({ notebooks });
+    return res.json(notebooks);
   })
 );
 module.exports = router;

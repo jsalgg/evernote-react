@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./notebookRender.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllNotebook } from "../../store/notebook";
 function NotebookRender() {
   const history = useHistory();
   const [errors, setErrors] = useState([]);
-  const [notebooks, setNotebooks] = useState([]);
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const notebooks = useSelector((state) => state.notebooks);
   if (!sessionUser) {
     window.alert("Please log in first");
     history.push("/login");
   }
+
   useEffect(() => {
     dispatch(getAllNotebook());
   }, [dispatch]);
@@ -26,7 +27,19 @@ function NotebookRender() {
           ))}
         </ul>
         <div className="notebook-container">
-          <ul>{console.log(notebooks)}</ul>
+          {Object.values(notebooks)?.map((notebook) => {
+            return (
+              <NavLink className="a-notebook" to={`/notebook/${notebook.id}`}>
+                <p
+                  style={{ backgroundColor: notebook.color }}
+                  className="notebook-li"
+                  key={notebook.id}
+                >
+                  {notebook.name}
+                </p>
+              </NavLink>
+            );
+          })}
         </div>
       </div>
     </>

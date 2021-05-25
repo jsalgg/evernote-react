@@ -39,9 +39,7 @@ export const getAllNotebook = () => async (dispatch) => {
   return response;
 };
 
-const initialState = { notebooks: null };
-
-const notebookReducer = (state = initialState, action) => {
+const notebookReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
     case CREATE_NOTEBOOK:
@@ -54,7 +52,9 @@ const notebookReducer = (state = initialState, action) => {
       return newState;
     case READ_NOTEBOOK:
       newState = Object.assign({}, state);
-      newState.notebooks = action.payload;
+      action.payload.forEach((notebook) => {
+        newState[notebook.id] = notebook;
+      });
       return newState;
     default:
       return state;
