@@ -39,6 +39,13 @@ export const getAllNotebook = () => async (dispatch) => {
   return response;
 };
 
+export const getOneNotebook = (notebook_id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/notebook/${notebook_id}`);
+  const data = await response.json();
+  dispatch(rNotebook(data));
+  return response;
+};
+
 const notebookReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {

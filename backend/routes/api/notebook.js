@@ -21,7 +21,19 @@ router.post(
     return res.json({ notebook });
   })
 );
-//get notebook
+//get a notebopopk
+router.get(
+  "/:id",
+  restoreUser,
+  asyncHandler(async (req, res) => {
+    const { user } = req;
+    const notebooks = await Notebook.findAll({ where: { id: req.params.id } });
+
+    return res.json(notebooks);
+  })
+);
+
+//get notebooks
 router.get(
   "/",
   restoreUser,
@@ -32,4 +44,5 @@ router.get(
     return res.json(notebooks);
   })
 );
+
 module.exports = router;

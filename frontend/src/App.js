@@ -35,6 +35,8 @@ function App() {
           <Route path="/notebook/new">
             <NotebookForm />
           </Route>
+          <Route path="/notebook/note">This is where note will go</Route>
+
           <Route path="/notebook/:id">
             <NotebookHome />
           </Route>
