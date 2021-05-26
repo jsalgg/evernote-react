@@ -1,7 +1,7 @@
 import { csrfFetch } from "./csrf";
-const CREATE_NOTE = "notebook/new";
-const DELETE_NOTE = "notebook/delete";
-const READ_NOTE = "notebook/";
+const CREATE_NOTE = "note/new";
+const DELETE_NOTE = "note/delete";
+const READ_NOTE = "note/";
 
 const cNote = (note) => {
   return {
@@ -9,7 +9,7 @@ const cNote = (note) => {
     payload: note,
   };
 };
-const rNotebook = (notes) => {
+const rNote = (notes) => {
   return {
     type: READ_NOTE,
     payload: notes,
@@ -17,24 +17,32 @@ const rNotebook = (notes) => {
 };
 
 export const createNote = (note) => async (dispatch) => {
-  const { user_id, name, color } = notebook;
-  const response = await csrfFetch("/api/notebook/new", {
+  const { user_id, title, body, notebook_id } = note;
+  const response = await csrfFetch("/api/note/new", {
     method: "POST",
     body: JSON.stringify({
       user_id,
-      name,
-      color,
+      title,
+      body,
+      notebook_id,
     }),
   });
   const data = await response.json();
-  dispatch(cNotebook(data));
+  dispatch(cNote(data));
   return response;
 };
 
 export const getOneNote = (note_id) => async (dispatch) => {
   const response = await csrfFetch(`/api/note/${note_id}`);
   const data = await response.json();
-  dispatch(rNotebook(data));
+  dispatch(rNote(data));
+  return response;
+};
+
+export const getAllNote = (notebook_id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/note/${notebook_id}/get`);
+  const data = await response.json();
+  dispatch(rNote(data));
   return response;
 };
 
@@ -43,11 +51,17 @@ const noteReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_NOTE:
       newState = Object.assign({}, state);
-      newState.notebooks = action.payload;
+      newState = action.payload;
       return newState;
     case DELETE_NOTE:
       newState = Object.assign({}, state);
-      newState.notebook = null;
+      newState = null;
+      return newState;
+    case READ_NOTE:
+      newState = Object.assign({}, state);
+      action.payload.forEach((note) => {
+        newState[note.id] = note;
+      });
       return newState;
     default:
       return state;

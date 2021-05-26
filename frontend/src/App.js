@@ -9,6 +9,7 @@ import Navigation from "./components/Navigation";
 import NotebookForm from "./components/NotebookForm";
 import NotebookRender from "./components/NotebookRender";
 import NotebookHome from "./components/NotebookHome";
+import NoteForm from "./components/NoteForm";
 import Home from "./components/Home";
 
 function App() {
@@ -35,11 +36,13 @@ function App() {
           <Route path="/notebook/new">
             <NotebookForm />
           </Route>
-          <Route path="/notebook/note">This is where note will go</Route>
-
+          <Route path="/notebook/:id/note/new">
+            <NoteForm />
+          </Route>
           <Route path="/notebook/:id">
             <NotebookHome />
           </Route>
+
           <Route path="/notebook">
             <NotebookRender />
           </Route>

@@ -1,0 +1,9 @@
+.new-note-btn {
+  margin: 10px;
+}
+.notes-container {
+  margin: 10px;
+}
+.notes-container ul {
+  list-style-type: none;
+}

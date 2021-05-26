@@ -3,6 +3,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import "./notebookRender.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllNotebook } from "../../store/notebook";
+
 function NotebookRender() {
   const history = useHistory();
   const [errors, setErrors] = useState([]);
@@ -19,7 +20,7 @@ function NotebookRender() {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);
     });
-  }, [dispatch]);
+  }, []);
   return (
     <>
       <div className="container">
@@ -32,7 +33,11 @@ function NotebookRender() {
         <div className="notebook-container">
           {Object.values(notebooks)?.map((notebook) => {
             return (
-              <NavLink className="a-notebook" to={`/notebook/${notebook.id}`}>
+              <NavLink
+                key={notebook.id}
+                className="a-notebook"
+                to={`/notebook/${notebook.id}`}
+              >
                 <p
                   style={{ backgroundColor: notebook.color }}
                   className="notebook-li"
