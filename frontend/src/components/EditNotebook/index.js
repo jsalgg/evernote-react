@@ -2,14 +2,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { createNote } from "../../store/note";
+import { updateNotebook } from "../../store/notebook";
 function NotebookForm() {
-  const dispatch = useDispatch();
   const { id } = useParams();
+  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const notebooks = useSelector((state) => state.notebooks);
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const OGname = notebooks[id].name;
+  const OGcolor = notebooks[id].color;
+  const COLORS = ["red", "blue", "green", "orange", "yellow"];
+  const [title, setTitle] = useState(OGname);
+  const [color, setColor] = useState(OGcolor);
   const [errors, setErrors] = useState([]);
   const history = useHistory();
   if (!sessionUser) {
@@ -18,12 +21,17 @@ function NotebookForm() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title && body) {
+    if (title && color) {
       setErrors([]);
-      const note = { user_id: sessionUser.id, title, body, notebook_id: id };
-      return dispatch(createNote(note))
+      const notebook = {
+        id: id,
+        user_id: sessionUser.id,
+        name: title,
+        color: color,
+      };
+      return dispatch(updateNotebook(notebook))
         .then(() => {
-          history.push(`/notebook/${id}`);
+          history.push("/notebook");
         })
         .catch(async (res) => {
           const data = await res.json();
@@ -35,15 +43,14 @@ function NotebookForm() {
   };
 
   return (
-    <div className="container-note">
-      <h2>Create a new Note</h2>
+    <div className="container">
+      <h2>Edit your Notebook</h2>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <p> New note for {notebooks[id].name}</p>
         <label>
           Title
           <input
@@ -54,14 +61,20 @@ function NotebookForm() {
           />
         </label>
         <label>
-          Body
-          <textarea
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
+          Notebook Color
+          <select
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
             required
-          />
+          >
+            {COLORS.map((color) => {
+              return (
+                <option key={color} value={`${color}`}>{`${color}`}</option>
+              );
+            })}
+          </select>
         </label>
-        <button type="submit">Create Note</button>
+        <button type="submit">Update Notebook</button>
       </form>
     </div>
   );

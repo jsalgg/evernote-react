@@ -8,7 +8,7 @@ const {
   requireAuth,
   restoreUser,
 } = require("../../utils/auth");
-const { Notebook } = require("../../db/models");
+const { Notebook, Note } = require("../../db/models");
 
 const router = express.Router();
 //new notebook
@@ -42,6 +42,31 @@ router.get(
     const notebooks = await Notebook.findAll({ where: { user_id: user.id } });
 
     return res.json(notebooks);
+  })
+);
+
+router.post(
+  "/:id/delete",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const res1 = await Note.destroy({ where: { notebook_id: id } });
+    const res2 = await Notebook.destroy({ where: { id: id } });
+
+    return res.json(res1 + res2);
+  })
+);
+
+router.post(
+  "/:id/edit",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { name, color } = req.body;
+    const notebook = await Notebook.update(
+      { name: name, color: color },
+      { where: { id } }
+    );
+
+    return res.json({ notebook });
   })
 );
 
