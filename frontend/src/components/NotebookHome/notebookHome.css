@@ -2,8 +2,19 @@
   margin: 10px;
 }
 .notes-container {
+  display: flex;
   margin: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .notes-container ul {
   list-style-type: none;
+  flex-wrap: wrap;
+}
+.notes-container li a {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+  flex-wrap: wrap;
 }

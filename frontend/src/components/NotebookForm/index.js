@@ -23,7 +23,6 @@ function NotebookForm() {
       const notebook = { user_id: sessionUser.id, name: title, color };
       return dispatch(createNotebook(notebook))
         .then(() => {
-          window.alert("Notebook Made");
           history.push("/notebook");
         })
         .catch(async (res) => {

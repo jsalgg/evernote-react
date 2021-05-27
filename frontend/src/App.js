@@ -11,7 +11,9 @@ import NotebookRender from "./components/NotebookRender";
 import NotebookHome from "./components/NotebookHome";
 import NoteForm from "./components/NoteForm";
 import EditNotebook from "./components/EditNotebook";
+import NoteFormEdit from "./components/NoteFormEdit";
 import Home from "./components/Home";
+import NoteHome from "./components/NoteHome";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +42,13 @@ function App() {
           <Route path="/notebook/:id/note/new">
             <NoteForm />
           </Route>
+          <Route path="/notebook/:notebook_id/note/:note_id/edit">
+            <NoteFormEdit />
+          </Route>
+          <Route path="/notebook/:notebook_id/note/:note_id/">
+            <NoteHome />
+          </Route>
+
           <Route path="/notebook/:id/edit">
             <EditNotebook />
           </Route>

@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 const CREATE_NOTE = "note/new";
 const DELETE_NOTE = "note/delete";
 const READ_NOTE = "note/";
+const UPDATE_NOTEBOOK = "note/update";
 
 const cNote = (note) => {
   return {
@@ -12,6 +13,18 @@ const cNote = (note) => {
 const rNote = (notes) => {
   return {
     type: READ_NOTE,
+    payload: notes,
+  };
+};
+const uNote = (note) => {
+  return {
+    type: UPDATE_NOTEBOOK,
+    payload: note,
+  };
+};
+const dNote = (notes) => {
+  return {
+    type: DELETE_NOTE,
     payload: notes,
   };
 };
@@ -46,22 +59,53 @@ export const getAllNote = (notebook_id) => async (dispatch) => {
   return response;
 };
 
+export const deleteNote = (note_id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/note/${note_id}/delete`, {
+    method: "POST",
+    body: JSON.stringify({
+      id: note_id,
+    }),
+  });
+  const data = await response.json();
+  dispatch(dNote(note_id));
+  return response;
+};
+
+export const updateNote = (note) => async (dispatch) => {
+  const response = await csrfFetch(`/api/note/${note.id}/edit`, {
+    method: "POST",
+    body: JSON.stringify({
+      title: note.title,
+      body: note.body,
+    }),
+  });
+  const data = await response.json();
+  dispatch(uNote(note));
+  return response;
+};
 const noteReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
     case CREATE_NOTE:
       newState = Object.assign({}, state);
-      newState = action.payload;
+      newState[action.payload.id] = action.payload;
       return newState;
     case DELETE_NOTE:
       newState = Object.assign({}, state);
-      newState = null;
+      delete newState[action.payload];
+      newState = { ...newState };
       return newState;
     case READ_NOTE:
       newState = Object.assign({}, state);
       action.payload.forEach((note) => {
         newState[note.id] = note;
       });
+      return newState;
+    case UPDATE_NOTEBOOK:
+      newState = Object.assign({}, state);
+      if (action.payload) {
+        newState[action.payload.id] = action.payload;
+      }
       return newState;
     default:
       return state;

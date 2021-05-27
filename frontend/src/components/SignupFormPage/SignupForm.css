@@ -3,12 +3,13 @@ form {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-bottom: 1px solid #a3b4a2;
-  border-radius: 2px;
-  background-color: #a3b4a2;
-  padding: 1%;
-  margin: 1%;
-  width: 25rem;
+  padding: 1rem;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background: #38686a;
+  box-shadow: 12px 12px 24px #30585a inset, -12px -12px 24px #40787a inset;
+  text-decoration: none;
+  color: white;
 }
 .container {
   display: flex;

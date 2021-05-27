@@ -1,23 +1,41 @@
 /* TODO Add site wide styles */
 a {
-  border: 1px solid #2589bd;
-  background-color: #2589bd;
-  border-radius: 5px;
-  color: #cdc6ae;
-  padding: 1%;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background: #38686a;
+  box-shadow: 12px 12px 24px #30585a inset, -12px -12px 24px #40787a inset;
   text-decoration: none;
-}
-a:hover {
-  background-color: #187795;
+  color: white;
+  padding: 1rem;
 }
 button {
-  border: 1px solid #2589bd;
-  background-color: #2589bd;
-  border-radius: 5px;
-  color: #cdc6ae;
-  padding: 1%;
+  padding: 1rem;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background: #38686a;
+  outline: none;
+
+  box-shadow: 12px 12px 24px #5d6464, -12px -12px 24px #40787a;
   text-decoration: none;
+  color: white;
+
+  padding: 1rem;
 }
-button:hover {
-  background-color: #187795;
+body {
+  background: #38686a;
+  color: white;
+  padding: 1rem;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background: #38686a;
+  box-shadow: 12px 12px 24px #30585a inset, -12px -12px 24px #40787a inset;
+  text-decoration: none;
+  color: white;
+}
+div {
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background: #38686a;
+  -webkit-box-shadow: 12px 12px 24px #30585a, -12px -12px 24px #40787a;
+  box-shadow: 12px 12px 24px #30585a, -12px -12px 24px #40787a;
 }

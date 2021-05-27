@@ -18,7 +18,7 @@ router.post(
     const { user_id, name, color } = req.body;
     const notebook = await Notebook.create({ user_id, name, color });
 
-    return res.json({ notebook });
+    return res.json(notebook);
   })
 );
 //get a notebopopk
@@ -66,7 +66,7 @@ router.post(
       { where: { id } }
     );
 
-    return res.json({ notebook });
+    return res.json(notebook);
   })
 );
 

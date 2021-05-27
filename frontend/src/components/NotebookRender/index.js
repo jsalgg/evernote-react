@@ -10,6 +10,7 @@ function NotebookRender() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const notebooks = useSelector((state) => state.notebooks);
+  let [reload, setReload] = useState(0);
   if (!sessionUser) {
     window.alert("Please log in first");
     history.push("/login");
@@ -19,10 +20,8 @@ function NotebookRender() {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);
     });
-    dispatch(getAllNotebook()).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-    });
+
+    setReload(reload + 1);
   };
 
   useEffect(() => {
@@ -33,6 +32,11 @@ function NotebookRender() {
   }, [dispatch]);
   return (
     <>
+      <h1>
+        {Object.values(notebooks).map((x) => {
+          return x.name;
+        })}
+      </h1>
       <div className="container">
         <h2>Here are your notebooks</h2>
         <ul>
@@ -43,27 +47,32 @@ function NotebookRender() {
         <div className="notebook-container">
           {Object.values(notebooks)?.map((notebook) => {
             return (
-              <div className="notbook-inner">
+              <div key={`a` + notebook.name} className="notbook-inner">
                 <NavLink
-                  key={notebook.id}
+                  key={`a` + notebook.id}
                   className="a-notebook"
                   to={`/notebook/${notebook.id}`}
                 >
                   <p
                     style={{ backgroundColor: notebook.color }}
                     className="notebook-li"
-                    key={notebook.id}
+                    key={`c` + notebook.id}
                   >
                     {notebook.name}
                   </p>
                 </NavLink>
                 <button
-                  key={notebook.id}
+                  key={`b` + notebook.id}
                   onClick={() => deleteButton(notebook.id)}
                 >
                   Delete
                 </button>
-                <NavLink to={`/notebook/${notebook.id}/edit`}>Edit</NavLink>
+                <NavLink
+                  key={`d` + notebook.id}
+                  to={`/notebook/${notebook.id}/edit`}
+                >
+                  Edit
+                </NavLink>
               </div>
             );
           })}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getOneNotebook } from "../../store/notebook";
-import { getAllNote } from "../../store/note";
+import { getAllNote, deleteNote } from "../../store/note";
 import "./notebookHome.css";
 function NotebookHome() {
   const dispatch = useDispatch();
@@ -10,16 +10,13 @@ function NotebookHome() {
   const notebooks = useSelector((state) => state.notebooks);
   const notes = useSelector((state) => state.notes);
   const { id } = useParams();
+  const deleteButton = (id) => {
+    dispatch(deleteNote(id));
+  };
   useEffect(() => {
-    dispatch(getOneNotebook(id))
-      .then(() => {
-        // window.alert("Notebook Accessed");
-      })
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
-
+    dispatch(getOneNotebook(id)).then(() => {
+      // window.alert("Notebook Accessed");
+    });
     dispatch(getAllNote(id))
       .then(() => {
         // window.alert("Notes Accessed");
@@ -42,11 +39,25 @@ function NotebookHome() {
         <ul>
           {Object.values(notes)?.map((note) => {
             return (
-              <li key={note.id}>
-                <NavLink key={note.id} to="">
-                  {note.title}
+              <div key={note.id} className="the-note">
+                <li key={note.id + "hi"}>
+                  <NavLink key={note.id} to={`/notebook/${id}/note/${note.id}`}>
+                    {note.title}
+                  </NavLink>
+                </li>
+                <button
+                  key={"jj" + note.id}
+                  onClick={() => deleteButton(note.id)}
+                >
+                  Delete
+                </button>
+                <NavLink
+                  key={"jj" + note.name}
+                  to={`${id}/note/${note.id}/edit`}
+                >
+                  Edit
                 </NavLink>
-              </li>
+              </div>
             );
           })}
         </ul>

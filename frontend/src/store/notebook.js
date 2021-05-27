@@ -39,7 +39,7 @@ export const deleteNotebook = (notebook_id) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  dispatch(dNotebook(data));
+  dispatch(dNotebook(notebook_id));
   return response;
 };
 
@@ -89,11 +89,11 @@ const notebookReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_NOTEBOOK:
       newState = Object.assign({}, state);
-      newState.notebooks = action.payload;
+      newState[action.payload.id] = action.payload;
       return newState;
     case DELETE_NOTEBOOK:
       newState = Object.assign({}, state);
-      delete newState[action.payload.id];
+      delete newState[action.payload];
       return newState;
     case READ_NOTEBOOK:
       newState = Object.assign({}, state);
@@ -103,7 +103,7 @@ const notebookReducer = (state = {}, action) => {
       return newState;
     case UPDATE_NOTEBOOK:
       newState = Object.assign({}, state);
-      newState.notebooks = action.payload;
+      newState[action.payload.id] = action.payload;
       return newState;
     default:
       return state;
