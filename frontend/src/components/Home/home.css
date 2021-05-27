@@ -1,0 +1,13 @@
+.home-title {
+  border-radius: 50px;
+  background: #187795;
+  box-shadow: 25px 25px 51px #14657f, -25px -25px 51px #1c89ab;
+  display: flex;
+  justify-content: center;
+}
+.home-title h1 {
+  font-family: "Poppins", sans-serif;
+  color: white;
+
+  outline: none;
+}

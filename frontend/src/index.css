@@ -1,41 +1,35 @@
 /* TODO Add site wide styles */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 3em;
+  padding: 1%;
+  bottom: 2em;
+  margin: 2em;
+}
+
 a {
-  -webkit-border-radius: 50px;
   border-radius: 50px;
-  background: #38686a;
-  box-shadow: 12px 12px 24px #30585a inset, -12px -12px 24px #40787a inset;
+  background: #187795;
+  box-shadow: 25px 25px 51px #14657f, -25px -25px 51px #1c89ab;
   text-decoration: none;
   color: white;
   padding: 1rem;
 }
 button {
   padding: 1rem;
-  -webkit-border-radius: 50px;
   border-radius: 50px;
-  background: #38686a;
-  outline: none;
-
-  box-shadow: 12px 12px 24px #5d6464, -12px -12px 24px #40787a;
+  background: #2589bd;
+  box-shadow: 20px 20px 60px #1f74a1, -20px -20px 60px #2b9ed9;
   text-decoration: none;
   color: white;
 
   padding: 1rem;
 }
 body {
-  background: #38686a;
-  color: white;
-  padding: 1rem;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-  background: #38686a;
-  box-shadow: 12px 12px 24px #30585a inset, -12px -12px 24px #40787a inset;
-  text-decoration: none;
+  background: #187795;
   color: white;
 }
 div {
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-  background: #38686a;
-  -webkit-box-shadow: 12px 12px 24px #30585a, -12px -12px 24px #40787a;
-  box-shadow: 12px 12px 24px #30585a, -12px -12px 24px #40787a;
 }

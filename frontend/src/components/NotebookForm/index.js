@@ -16,8 +16,7 @@ function NotebookForm() {
     window.alert("Please log in first");
     history.push("/login");
   }
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     if (title && color) {
       setErrors([]);
       const notebook = { user_id: sessionUser.id, name: title, color };
@@ -66,7 +65,13 @@ function NotebookForm() {
             })}
           </select>
         </label>
-        <button type="submit">Create Notebook</button>
+        <a
+          onClick={() => {
+            handleSubmit();
+          }}
+        >
+          Create Notebook
+        </a>
       </form>
     </div>
   );

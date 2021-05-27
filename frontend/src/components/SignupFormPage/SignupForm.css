@@ -4,10 +4,9 @@ form {
   align-items: center;
   flex-direction: column;
   padding: 1rem;
-  -webkit-border-radius: 50px;
   border-radius: 50px;
-  background: #38686a;
-  box-shadow: 12px 12px 24px #30585a inset, -12px -12px 24px #40787a inset;
+  background: #2589bd;
+  box-shadow: 20px 20px 60px #1f74a1, -20px -20px 60px #2b9ed9;
   text-decoration: none;
   color: white;
 }

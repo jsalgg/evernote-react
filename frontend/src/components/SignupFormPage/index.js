@@ -16,8 +16,7 @@ function SignupFormPage() {
 
   if (sessionUser) return <Redirect to="/" />;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(
@@ -76,7 +75,13 @@ function SignupFormPage() {
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <a
+          onClick={() => {
+            handleSubmit();
+          }}
+        >
+          Sign Up
+        </a>
       </form>
     </div>
   );

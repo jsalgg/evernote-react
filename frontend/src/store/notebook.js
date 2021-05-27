@@ -38,7 +38,6 @@ export const deleteNotebook = (notebook_id) => async (dispatch) => {
       notebook_id,
     }),
   });
-  const data = await response.json();
   dispatch(dNotebook(notebook_id));
   return response;
 };
@@ -79,8 +78,7 @@ export const updateNotebook = (notebook) => async (dispatch) => {
       color: notebook.color,
     }),
   });
-  const data = await response.json();
-  dispatch(uNotebook(data));
+  dispatch(uNotebook(notebook));
   return response;
 };
 

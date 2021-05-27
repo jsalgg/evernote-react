@@ -32,11 +32,6 @@ function NotebookRender() {
   }, [dispatch]);
   return (
     <>
-      <h1>
-        {Object.values(notebooks).map((x) => {
-          return x.name;
-        })}
-      </h1>
       <div className="container">
         <h2>Here are your notebooks</h2>
         <ul>
@@ -47,32 +42,33 @@ function NotebookRender() {
         <div className="notebook-container">
           {Object.values(notebooks)?.map((notebook) => {
             return (
-              <div key={`a` + notebook.name} className="notbook-inner">
-                <NavLink
-                  key={`a` + notebook.id}
-                  className="a-notebook"
-                  to={`/notebook/${notebook.id}`}
-                >
-                  <p
-                    style={{ backgroundColor: notebook.color }}
-                    className="notebook-li"
-                    key={`c` + notebook.id}
+              <div key={`a` + notebook.name} className="notebook-inner">
+                <div className="notebook-inner--title">
+                  <NavLink
+                    style={{ background: notebook.color }}
+                    key={`a` + notebook.id}
+                    className="a-notebook"
+                    to={`/notebook/${notebook.id}`}
                   >
                     {notebook.name}
-                  </p>
-                </NavLink>
-                <button
-                  key={`b` + notebook.id}
-                  onClick={() => deleteButton(notebook.id)}
-                >
-                  Delete
-                </button>
-                <NavLink
-                  key={`d` + notebook.id}
-                  to={`/notebook/${notebook.id}/edit`}
-                >
-                  Edit
-                </NavLink>
+                  </NavLink>
+                </div>
+                <div className="notebook-inner--btns" key={notebook.name + "v"}>
+                  <a
+                    style={{ background: notebook.color }}
+                    key={`b` + notebook.id}
+                    onClick={() => deleteButton(notebook.id)}
+                  >
+                    Delete
+                  </a>
+                  <NavLink
+                    style={{ background: notebook.color }}
+                    key={`d` + notebook.id}
+                    to={`/notebook/${notebook.id}/edit`}
+                  >
+                    Edit
+                  </NavLink>
+                </div>
               </div>
             );
           })}

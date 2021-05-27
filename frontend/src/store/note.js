@@ -66,7 +66,6 @@ export const deleteNote = (note_id) => async (dispatch) => {
       id: note_id,
     }),
   });
-  const data = await response.json();
   dispatch(dNote(note_id));
   return response;
 };
@@ -79,7 +78,6 @@ export const updateNote = (note) => async (dispatch) => {
       body: note.body,
     }),
   });
-  const data = await response.json();
   dispatch(uNote(note));
   return response;
 };
