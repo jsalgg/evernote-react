@@ -28,14 +28,18 @@ function NotebookHome() {
   }, [dispatch, id]);
   return (
     <>
-      <h1>{notebooks[id]?.name}</h1>
+      <div className="h2-contain">
+        <h1>{notebooks[id]?.name}</h1>
+      </div>
       <ul>
         {errors?.map((err) => {
           return <li key={err}>err</li>;
         })}
       </ul>
       <div className="notes-container">
-        <h2>Your notes</h2>
+        <div className="h2-contain">
+          <h2>Your notes</h2>
+        </div>
         <ul>
           {Object.values(notes)?.map((note) => {
             return (
@@ -45,12 +49,9 @@ function NotebookHome() {
                     {note.title}
                   </NavLink>
                 </li>
-                <button
-                  key={"jj" + note.id}
-                  onClick={() => deleteButton(note.id)}
-                >
+                <a key={"jj" + note.id} onClick={() => deleteButton(note.id)}>
                   Delete
-                </button>
+                </a>
                 <NavLink
                   key={"jj" + note.name}
                   to={`${id}/note/${note.id}/edit`}

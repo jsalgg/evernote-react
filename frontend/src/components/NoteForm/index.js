@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { createNote } from "../../store/note";
+import "./noteform.css";
 function NotebookForm() {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -16,8 +17,7 @@ function NotebookForm() {
     window.alert("Please log in first");
     history.push("/login");
   }
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     if (title && body) {
       setErrors([]);
       const note = { user_id: sessionUser.id, title, body, notebook_id: id };
@@ -61,7 +61,13 @@ function NotebookForm() {
             required
           />
         </label>
-        <button type="submit">Create Note</button>
+        <a
+          onClick={() => {
+            handleSubmit();
+          }}
+        >
+          Create Note
+        </a>
       </form>
     </div>
   );

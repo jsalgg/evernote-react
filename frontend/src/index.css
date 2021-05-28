@@ -29,7 +29,13 @@ button {
 }
 body {
   background: #187795;
+  border-radius: 50px;
+  box-shadow: inset 25px 25px 51px #14657f, inset -25px -25px 51px #1c89ab;
   color: white;
+  right: 25%;
+  display: flex;
+  justify-content: center;
+  padding: 10%;
 }
 div {
 }
